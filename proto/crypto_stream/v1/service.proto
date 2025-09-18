@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package crypto_stream.v1;
+
+import "google/protobuf/empty.proto";
+
+// real-time price update for a cryptocurrency
+message PriceUpdate {
+  string ticker = 1;        
+  double price = 2;         
+  int64 timestamp = 3;      
+  double change_24h = 4;   
+}
+
+// request to subscribe or unsubscribe from a ticker
+message SubscriptionRequest {
+  string ticker = 1;       
+}
+
+// response for subscription operations
+message SubscriptionResponse {
+  bool success = 1;                    
+  string message = 2;                  
+  repeated string active_tickers = 3; 
+}
+
+// service for managing cryptocurrency price subscriptions
+service CryptoStreamService {
+  rpc SubscribeTicker(SubscriptionRequest) returns (SubscriptionResponse);
+  
+  rpc UnsubscribeTicker(SubscriptionRequest) returns (SubscriptionResponse);
+  
+  rpc GetActiveSubscriptions(google.protobuf.Empty) returns (SubscriptionResponse);
+}

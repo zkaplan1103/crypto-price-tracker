@@ -1,0 +1,161 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  width: 500px;
+  margin: 20px auto 0 auto;
+}
+
+.tickerItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background-color: #e8e8e8;
+  border-radius: 6px;
+  height: 60px;
+  width: 500px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.tickerItem.fading {
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+}
+
+.tickerItem.new {
+  opacity: 0;
+  transform: scale(0.98) translateY(0);
+  animation: tickerAppear 150ms ease-out forwards;
+}
+
+.tickerItem.sliding {
+  transform: translateY(70px);
+  animation: slideDown 250ms ease-out forwards;
+}
+
+.tickerItem.movingUp {
+  transform: translateY(-70px);
+  transition: transform 300ms ease-out;
+}
+
+.tickerSymbol {
+  font-weight: 600;
+  font-size: 16px;
+  color: #1f2937;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.priceContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 400;
+  color: #374151;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  transition: color 0.3s ease-out, font-weight 0.3s ease-out;
+}
+
+.price.flashing {
+  font-weight: 600;
+  color: #000000;
+}
+
+.notFoundMessage {
+  font-size: 14px;
+  color: #dc3545;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.loadingSpinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #9ca3af;
+  border-top: 2px solid #374151;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.removeButton {
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  transition: background-color 0.2s ease;
+}
+
+.removeButton.hovered {
+  background-color: #b8b8b8;
+}
+
+.waveBar {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #000000;
+  animation: waveBar 350ms ease-out forwards;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes tickerAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.98) translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(70px);
+  }
+}
+
+@keyframes waveBar {
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  30% {
+    opacity: 1;
+    transform: scaleY(0.3);
+    transform-origin: top;
+  }
+  70% {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  100% {
+    opacity: 0;
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+}
