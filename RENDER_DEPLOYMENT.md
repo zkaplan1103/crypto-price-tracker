@@ -22,8 +22,8 @@ Deploy both frontend and backend to Render for free hosting that's perfect for y
    - **Branch**: `main`
    - **Region**: `Oregon (US West)`
    - **Root Directory**: Leave empty (uses project root)
-   - **Build Command**: Leave default
-   - **Start Command**: Leave default
+   - **Build Command**: Leave as `pnpm install --frozen-lockfile; pnpm run build` 
+   - **Start Command**: Leave empty (Docker handles this)
 4. **Environment Variables**: 
    - `NODE_ENV` = `production`
 5. Click **"Create Web Service"**
@@ -33,16 +33,21 @@ Deploy both frontend and backend to Render for free hosting that's perfect for y
 2. Connect same repository
 3. Configure:
    - **Name**: `crypto-tracker-frontend`
-   - **Environment**: `Node`
-   - **Region**: `Oregon (US West)`
+   - **Language**: `Node`
    - **Branch**: `main`
+   - **Region**: `Oregon (US West)`
    - **Root Directory**: `frontend`
-   - **Build Command**: `npm install -g pnpm && pnpm install && pnpm run build`
+   - **Build Command**: `npm install -g pnpm && pnpm install && pnpm run proto:generate && pnpm run build`
    - **Start Command**: `pnpm start`
 4. **Environment Variables**:
    - `NODE_ENV` = `production`
    - `NEXT_PUBLIC_API_URL` = `https://crypto-tracker-backend.onrender.com` (use your actual backend URL)
 5. Click **"Create Web Service"**
+
+**If build fails with protobuf errors:**
+- Go to your frontend service settings
+- Update the **Build Command** to: `npm install -g pnpm && pnpm install && pnpm run proto:generate && pnpm run build`
+- Click **"Manual Deploy"** to retry with the updated command
 
 ### 4. Get Your URLs
 After deployment completes:
