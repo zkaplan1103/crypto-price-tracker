@@ -1,0 +1,21 @@
+{
+    "name": "project-pluto",
+    "private": true,
+    "type": "module",
+    "scripts": {
+      "dev": "./run.sh",
+      "install:all": "pnpm install --recursive",
+      "build": "pnpm --recursive run build",
+      "buf:generate": "buf generate"
+    },
+    "workspaces": [
+      "frontend",
+      "backend"
+    ],
+    "devDependencies": {
+      "@bufbuild/buf": "^1.28.1",
+      "@bufbuild/protoc-gen-es": "^1.6.0",
+      "@connectrpc/protoc-gen-connect-es": "^1.2.0",
+      "typescript": "^5.3.3"
+    }
+  }

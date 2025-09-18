@@ -1,0 +1,23 @@
+version: v1
+plugins:
+  - plugin: buf.build/bufbuild/es:v1.7.2
+    out: frontend/src/gen
+    opt: 
+      - target=ts
+      - import_extension=none
+  - plugin: buf.build/connectrpc/es:v1.4.0
+    out: frontend/src/gen
+    opt: 
+      - target=ts
+      - import_extension=none
+  
+  - plugin: buf.build/bufbuild/es:v1.7.2
+    out: backend/src/gen
+    opt: 
+      - target=ts
+      - import_extension=none
+  - plugin: buf.build/connectrpc/es:v1.4.0
+    out: backend/src/gen
+    opt: 
+      - target=ts
+      - import_extension=none
