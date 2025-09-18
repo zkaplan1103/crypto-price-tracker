@@ -1,0 +1,29 @@
+services:
+  # Backend Service
+  - type: web
+    name: crypto-tracker-backend
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    plan: free
+    region: oregon
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  # Frontend Service  
+  - type: web
+    name: crypto-tracker-frontend
+    env: node
+    buildCommand: cd frontend && npm install -g pnpm && pnpm install && pnpm run build
+    startCommand: cd frontend && pnpm start
+    plan: free
+    region: oregon
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: crypto-tracker-backend
+          property: host

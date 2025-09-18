@@ -22,8 +22,16 @@ export class WebSocketClient {
   private onConnectionStateChange: (state: ConnectionState) => void = () => {};
   private onTickerValidationFailed: (ticker: string) => void = () => {};
 
-  constructor(url: string = 'ws://localhost:8080/ws') {
-    this.url = url;
+  constructor(url?: string) {
+    if (url) {
+      this.url = url;
+    } else {
+      // Use environment variable for production, fallback to localhost for development
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+      // Convert HTTP/HTTPS to WS/WSS
+      const wsUrl = apiUrl.replace(/^http:\/\//, 'ws://').replace(/^https:\/\//, 'wss://');
+      this.url = `${wsUrl}/ws`;
+    }
   }
 
   connect(): Promise<void> {
