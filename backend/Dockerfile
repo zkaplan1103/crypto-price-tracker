@@ -20,6 +20,9 @@ RUN buf generate
 WORKDIR /app/backend
 RUN pnpm install --frozen-lockfile
 
+# Install Playwright browsers
+RUN npx playwright install chromium --with-deps
+
 # Build the backend
 RUN pnpm run build
 
